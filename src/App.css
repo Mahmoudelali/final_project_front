@@ -143,3 +143,38 @@
 	cursor: inherit;
 	line-height: inherit;
 }
+
+/* hosted-trips-container */
+.hosted-trips-container {
+	padding: 1rem 0.5rem;
+}
+
+.hosted-trips-container article {
+	background-color: rgba(242, 242, 242, 0.682);
+	border: 1px solid rgb(222, 222, 222);
+	padding: 10px;
+	border-radius: 10px;
+	display: flex;
+	margin-bottom: 1rem;
+	position: relative;
+	min-height: 180px;
+}
+
+.hosted-trips-container article::before {
+	position: absolute;
+	content: '';
+	top: 0;
+	left: 0;
+	width: 10px;
+	height: 100%;
+	background-color: var(--violet-color);
+	border-top-left-radius: 10px;
+	border-bottom-left-radius: 10px;
+	z-index: 999;
+}
+.hosted-trips-container article div:nth-child(2) {
+	font-size: 14px;
+}
+.hosted-trips-container article strong {
+	letter-spacing: 0.8px;
+}

@@ -137,11 +137,19 @@ export const getUserById = (id) => {
 		axios
 			.get(`${import.meta.env.VITE_APP_URL}/api/user/${id}`)
 			.then((response) => {
-				console.log(response.data.message.hosted_trips);
+				console.log(response.data.message);
 			});
 	} catch (error) {
 		console.log(error);
 	}
+};
+export const getTripsByUserID = (id, handler) => {
+	axios
+		.get(`${import.meta.env.VITE_APP_URL}/api/user/${id}`)
+		.then((response) => {
+			console.log(response.data.message.hosted_trips);
+			handler(response.data.message.hosted_trips);
+		});
 };
 function App() {
 	const [sidebarExpanded, setSidebarExpanded] = useState(

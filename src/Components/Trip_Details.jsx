@@ -6,7 +6,7 @@ import { getTripByID } from '../App.jsx';
 import Map from './Map.jsx';
 const TripDetails = ({ detailsExpanded, setDetailsExpanded }) => {
 	const id = useParams();
-	const [trip, setTrip] = useState({});
+	const [trips, setTrip] = useState({});
 	useEffect(() => {
 		getTripByID({
 			trip_id: id.id,
@@ -14,7 +14,7 @@ const TripDetails = ({ detailsExpanded, setDetailsExpanded }) => {
 		}),
 			[];
 	});
-	console.log(trip);
+	console.log(trips);
 
 	return (
 		<>

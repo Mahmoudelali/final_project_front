@@ -3,14 +3,15 @@
 	flex-wrap: wrap;
 }
 .passengers > div {
-	box-shadow: -5px 5px 25px 0px rgba(190, 175, 175, 0.417);
-	margin-right: -10px;
+	
+	border: 2px solid rgba(93, 92, 70, 0.924);
+	margin-right: -18px;
 	width: 40px;
 	height: 40px;
 	border-radius: 50%;
 	overflow: hidden;
 	/* transform-origin: 100% 100%; */
-	transform: perspective(200px) rotateY(35deg);
+	transform: perspective(200px) rotateY(25deg);
 }
 
 .passengers > div img {

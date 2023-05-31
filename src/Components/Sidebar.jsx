@@ -3,6 +3,7 @@ import { sidebarStatus } from '../App.jsx';
 import StarIcon from '@mui/icons-material/Star';
 import noImage from '../assets/PROFILE.jpg';
 
+
 import { NavLink } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -120,6 +121,9 @@ const Sidebar = ({ profile, rate }) => {
 					<hr />
 					<li style={{ marginTop: '.6rem' }}>
 						<NavLink
+							onClick={() => {
+								setSidebarExpanded(!setSidebarExpanded);
+							}}
 							to="/trips/hosted"
 							style={{ color: '#191933' }}
 						>
@@ -127,12 +131,24 @@ const Sidebar = ({ profile, rate }) => {
 						</NavLink>
 					</li>
 					<li>
-						<NavLink to="/joined" style={{ color: '#191933' }}>
+						<NavLink
+							to="/joined"
+							style={{ color: '#191933' }}
+							onClick={() => {
+								setSidebarExpanded(!setSidebarExpanded);
+							}}
+						>
 							Joined Trips
 						</NavLink>
 					</li>
 				</ul>
-				<button className="unset" style={{ marginTop: 'auto' }}>
+				<button
+					className="unset"
+					style={{ marginTop: 'auto' }}
+					onClick={() => {
+						setSidebarExpanded(!setSidebarExpanded);
+					}}
+				>
 					<ExitToAppIcon sx={{ verticalAlign: 'middle	' }} />
 					signOut
 				</button>
