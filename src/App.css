@@ -175,6 +175,11 @@
 .hosted-trips-container article div:nth-child(2) {
 	font-size: 14px;
 }
+.hosted-trips-container article div:nth-child(2) span {
+	line-height: 1.8;
+}
 .hosted-trips-container article strong {
 	letter-spacing: 0.8px;
+	color: rgb(41, 41, 41);
+	text-transform: capitalize;
 }

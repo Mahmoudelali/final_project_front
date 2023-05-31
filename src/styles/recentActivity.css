@@ -1,7 +1,7 @@
 .recent-activity {
 	width: 150px;
 	margin-left: 10px;
-	margin-top: 5px;
+	margin-top: 15px;
 }
 
 .recent-activity-top {
@@ -12,10 +12,12 @@
 
 .recent-activity-top svg {
 	box-sizing: content-box;
-	font-size: 24px;
+	font-size: 30px;
 	padding: 4px;
 	border-radius: 6px;
 	background: rgba(55, 55, 55, 0.1);
+	color: rgb(66, 66, 66);
+	border-radius: 50%;
 }
 
 .recent-activity-top p {
