@@ -3,7 +3,6 @@ import { sidebarStatus } from '../App.jsx';
 import StarIcon from '@mui/icons-material/Star';
 import noImage from '../assets/PROFILE.jpg';
 
-
 import { NavLink } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
@@ -11,6 +10,7 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import CommuteIcon from '@mui/icons-material/Commute';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Cookies from 'js-cookie';
+import { useSignOut } from 'react-auth-kit';
 
 const sideLinks = [
 	{
@@ -45,6 +45,7 @@ const sideLinks = [
 const Sidebar = ({ profile, rate }) => {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(sidebarStatus);
 	const userData = JSON.parse(Cookies.get('user'));
+	const signOut = useSignOut();
 	return (
 		<div
 			className={
@@ -147,6 +148,7 @@ const Sidebar = ({ profile, rate }) => {
 					style={{ marginTop: 'auto' }}
 					onClick={() => {
 						setSidebarExpanded(!setSidebarExpanded);
+						signOut();
 					}}
 				>
 					<ExitToAppIcon sx={{ verticalAlign: 'middle	' }} />

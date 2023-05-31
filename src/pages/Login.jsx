@@ -69,7 +69,7 @@ const Login = () => {
 						token: res.data.token,
 						expiresIn: 120,
 						tokenType: 'Bearer',
-						authState: res.data.authUserState,
+						authState: res.data.response,
 					})
 				) {
 					Cookies.set('user', JSON.stringify(res.data.response));

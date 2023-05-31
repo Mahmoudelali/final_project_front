@@ -12,16 +12,17 @@ import VisibilityIcon from '@mui/icons-material/Visibility';
 
 const Join = ({ getAllTrips, joinTrip }) => {
 	const [trips, setTrips] = useState({});
-	const [tripData, setTripData] = useState({
-		// host_name: userInfo._id,
-		start_location: ``,
-		end_location: ``,
-		start_date: Date.now(),
-		available_seats: 0,
-		vehicle_type: '',
-		description: ``,
-		cost: 0,
-	});
+	const [tripData, setTripData] = useState(
+		// // host_name: userInfo._id,
+		// start_location: ``,
+		// end_location: ``,
+		// start_date: Date.now(),
+		// available_seats: 0,
+		// vehicle_type: '',
+		// description: ``,
+		// cost: 0,
+		null,
+	);
 
 	const handleInputChange = (e) => {
 		setTripData({ ...tripData, [e.target.name]: e.target.value });
@@ -128,9 +129,7 @@ const Join = ({ getAllTrips, joinTrip }) => {
 			{trips.length > 0 &&
 				trips
 					.filter((trip) => {
-						return tripData.end_location == '' &&
-							!tripData.start_location == '' &&
-							!tripData.vehicle_type == ''
+						return !tripData
 							? trips
 							: trip.start_location === tripData.start_location ||
 									trip.end_location ===
