@@ -1,0 +1,92 @@
+:root {
+	--charcoal-color: #191933;
+	--violet-color: #b266ec;
+	--blue-color: #126aff;
+	--white-color: #fff;
+}
+.base-30 {
+	flex-basis: 30%;
+}
+.trip-card {
+	position: relative;
+	border: 1px solid lightgray;
+
+	color: gray;
+	max-width: 500px;
+	/* padding: 0 0.7rem 0.7rem 0.7rem; */
+	border-radius: 10px;
+	background-color: #fff;
+	box-shadow: 10px 10px 45px -17px rgba(135, 135, 135, 0.75);
+}
+@media screen and (max-width: 468px) {
+	.trip-card {
+		width: 94%;
+		margin: 0 auto;
+	}
+}
+
+.seat-available {
+	background-color: '#1fae51';
+	height: '10px';
+	width: '10px';
+	border-radius: '50%';
+}
+.seat-unavailable {
+	background-color: 'brown';
+	height: '10px';
+	width: '10px';
+	border-radius: '50%';
+}
+.trip-type-img {
+	color: var(--violet-color);
+	border: 1px solid lightgray;
+	position: relative;
+	width: 70px;
+	height: 70px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	transform: translateY(-65%);
+	margin: 0 auto;
+	z-index: 99999999;
+}
+.trip-type-icon {
+	position: absolute;
+}
+.trip-type-icon svg {
+	font-size: 2rem !important;
+}
+
+.trip-card strong {
+	color: gray;
+	text-transform: capitalize;
+	font-size: 0.8rem;
+}
+.trip-card span {
+	font-size: 16px;
+}
+
+.field-value {
+	font-size: 16px;
+}
+
+.preview-container {
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100vw;
+	height: 100vh;
+	background-color: #ffffffc4;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	transition: 0.2s;
+}
+.preview-container-shrinked {
+	display: none;
+}
+.join-trip-container select {
+	border: 0;
+	background-color: #fff !important;
+}

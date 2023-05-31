@@ -1,0 +1,145 @@
+:root {
+	--charcoal-color: #191933;
+	--violet-color: #b266ec;
+	--blue-color: #126aff;
+	--white-color: #fff;
+}
+.unset {
+	all: unset;
+}
+.block {
+	display: block;
+}
+.middle {
+	vertical-align: middle;
+}
+.homepage-container header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.brand-container {
+	height: 200px;
+	margin-top: -60px;
+	font-size: 3rem !important;
+}
+
+.brand-container img {
+	height: 100%;
+	object-fit: cover;
+}
+.toggle-icons {
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin: 1rem;
+}
+/**/
+.side-collapse-toggle {
+	position: absolute;
+	top: 0;
+	right: 0;
+	color: var(--white-color);
+	margin: 0.5rem;
+}
+.side-collapse-toggle svg {
+	font-size: 1.3rem;
+}
+.side-bar {
+	height: 100vh;
+	width: 70%;
+	background-color: #eee;
+	position: fixed;
+	top: 0;
+	left: 0;
+	transition: 0.3s;
+	box-shadow: 62px 28px 60px -89px rgba(14, 0, 71, 1);
+	z-index: 99999999999999999;
+}
+.side-bar-collapsed {
+	transform: translateX(-200%) !important;
+	transition: 0.5s ease-in-out;
+}
+
+/* sideBar */
+.user-profile-overall {
+	background-color: var(--charcoal-color);
+	color: var(--white-color);
+	height: 30%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+}
+.user-image-container {
+	/* background-color: red; */
+	margin: 0 auto;
+	position: relative;
+	width: 120px;
+	height: 120px;
+	border-radius: 50%;
+	overflow: hidden;
+	margin-bottom: 1rem;
+}
+
+.user-image-container img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+.change-profile {
+	position: absolute;
+	bottom: 0;
+	right: 0;
+}
+.change-profile svg {
+	color: var(--violet-color);
+}
+
+/* new Trip form  */
+
+.new-trip-form {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 1rem;
+	max-width: 500px;
+}
+.new-trip-form fieldset {
+	border-radius: 10px;
+	border: 1px solid lightgray;
+	padding: 0.4rem;
+	flex: 1 0 100%;
+}
+.new-trip-form fieldset:nth-child(3) {
+	display: grid;
+	grid-template-columns: repeat(8, 1fr);
+	grid-template-rows: repeat(3, 1fr);
+}
+
+.new-trip-form label {
+	font-size: 18px;
+	display: block;
+	margin: 10px 0;
+}
+.new-trip-form input {
+	line-height: 2;
+	border-bottom: 1px solid lightblue;
+}
+.new-trip-form button {
+	margin-top: 10px;
+	text-align: center;
+	padding: 10px;
+	background-color: var(--violet-color);
+	color: var(--white-color);
+	border-radius: 10px;
+}
+.new-trip-form select {
+	/* appearance: none; */
+	background-color: rgba(173, 216, 230, 0.246);
+	padding: 0.3em 0;
+	width: 100%;
+	font-family: inherit;
+	font-size: inherit;
+	cursor: inherit;
+	line-height: inherit;
+}
