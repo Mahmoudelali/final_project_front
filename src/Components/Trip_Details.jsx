@@ -8,8 +8,13 @@ const TripDetails = ({ detailsExpanded, setDetailsExpanded }) => {
 	const id = useParams();
 	const [trip, setTrip] = useState({});
 	useEffect(() => {
-		getTripByID({ trip_id: id.id, stateHandler: setTrip, state: trip }), [];
+		getTripByID({
+			trip_id: id.id,
+			stateHandler: setTrip,
+		}),
+			[];
 	});
+	console.log(trip);
 
 	return (
 		<>

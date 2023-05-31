@@ -64,12 +64,11 @@ export const getAllTrips = (handler) => {
 		})
 		.catch((err) => console.log(err));
 };
-export const getTripByID = ({ trip_id, stateHandler, state }) => {
+export const getTripByID = ({ trip_id, stateHandler }) => {
 	axios
 		.get(`${import.meta.env.VITE_APP_URL}/api/trips/${trip_id}`)
 		.then((res) => {
-			console.log(res.data.trip);
-			stateHandler(state);
+			stateHandler(res.data.trip);
 		})
 		.catch((err) => console.log(err));
 };
