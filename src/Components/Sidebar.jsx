@@ -11,6 +11,8 @@ import CommuteIcon from '@mui/icons-material/Commute';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Cookies from 'js-cookie';
 import { useSignOut } from 'react-auth-kit';
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import GroupsIcon from '@mui/icons-material/Groups';
 
 const sideLinks = [
 	{
@@ -40,6 +42,22 @@ const sideLinks = [
 			/>
 		),
 		path: '/new',
+	},
+	{
+		name: 'Hosted Trips',
+		icon: (
+			<HandshakeIcon
+				sx={{ verticalAlign: 'middle', marginBottom: '5px' }}
+			/>
+		),
+		path: '/trips/hosted',
+	},
+	{
+		name: 'joined Trips',
+		icon: (
+			<GroupsIcon sx={{ verticalAlign: 'middle', marginBottom: '5px' }} />
+		),
+		path: '/trips/joined',
 	},
 ];
 const Sidebar = ({ profile, rate }) => {
@@ -119,30 +137,8 @@ const Sidebar = ({ profile, rate }) => {
 							</li>
 						);
 					})}
-					<hr />
-					<li style={{ marginTop: '.6rem' }}>
-						<NavLink
-							onClick={() => {
-								setSidebarExpanded(!setSidebarExpanded);
-							}}
-							to="/trips/hosted"
-							style={{ color: '#191933' }}
-						>
-							Hosted Trips
-						</NavLink>
-					</li>
-					<li>
-						<NavLink
-							to="/joined"
-							style={{ color: '#191933' }}
-							onClick={() => {
-								setSidebarExpanded(!setSidebarExpanded);
-							}}
-						>
-							Joined Trips
-						</NavLink>
-					</li>
 				</ul>
+
 				<button
 					className="unset"
 					style={{ marginTop: 'auto' }}
