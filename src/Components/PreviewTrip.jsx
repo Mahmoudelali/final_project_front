@@ -69,6 +69,8 @@ const PreviewTrip = ({
 						top: 0,
 						right: 0,
 						margin: '.5rem',
+						zIndex: 8,
+						color: 'black',
 					}}
 				>
 					<CloseIcon />
@@ -126,7 +128,7 @@ const PreviewTrip = ({
 						position: 'absolute',
 						top: 0,
 						left: 0,
-						width: '100%',
+
 						zIndex: 0,
 						backgroundColor: 'lightblue',
 					}}

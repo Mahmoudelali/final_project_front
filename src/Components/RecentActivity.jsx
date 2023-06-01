@@ -13,7 +13,7 @@ export default function RecentActivity({
 		<div className="recent-activity">
 			<div className="recent-activity-top">
 				<div className="recent-activity-icon-container">
-					<PlaceIcon className="middle" />
+					<PlaceIcon className="middle" style={{ color: 'brown' }} />
 					<span style={{ marginLeft: '5px', fontSize: '18px' }}>
 						{start_location}
 					</span>
@@ -25,7 +25,10 @@ export default function RecentActivity({
 			</p>
 			<div className="recent-activity-top" style={{ marginTop: '10px' }}>
 				<div className="recent-activity-icon-container">
-					<AssistantPhotoIcon className="middle" />
+					<AssistantPhotoIcon
+						className="middle"
+						style={{ color: '#191933' }}
+					/>
 					<span style={{ marginLeft: '5px', fontSize: '18px' }}>
 						{end_location}
 					</span>

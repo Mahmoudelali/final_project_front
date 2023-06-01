@@ -9,20 +9,11 @@ import PlaceIcon from '@mui/icons-material/Place';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import DescriptionIcon from '@mui/icons-material/Description';
 import VisibilityIcon from '@mui/icons-material/Visibility';
+import Loader from '../Components/Loader.jsx';
 
 const Join = ({ getAllTrips, joinTrip }) => {
 	const [trips, setTrips] = useState({});
-	const [tripData, setTripData] = useState(
-		// // host_name: userInfo._id,
-		// start_location: ``,
-		// end_location: ``,
-		// start_date: Date.now(),
-		// available_seats: 0,
-		// vehicle_type: '',
-		// description: ``,
-		// cost: 0,
-		null,
-	);
+	const [tripData, setTripData] = useState(null);
 
 	const handleInputChange = (e) => {
 		setTripData({ ...tripData, [e.target.name]: e.target.value });
@@ -35,7 +26,6 @@ const Join = ({ getAllTrips, joinTrip }) => {
 	return (
 		<div className="join-trip-container" style={{ paddingBottom: '2rem' }}>
 			<Outlet />
-
 			<form
 				style={{
 					background: '#fff3cf',
@@ -126,7 +116,10 @@ const Join = ({ getAllTrips, joinTrip }) => {
 				</div>
 			</form>
 
-			{trips.length > 0 &&
+			{trips.length === 0 ? (
+				<Loader isComponent={true} />
+			) : (
+				trips.length > 0 &&
 				trips
 					.filter((trip) => {
 						return !tripData
@@ -134,7 +127,9 @@ const Join = ({ getAllTrips, joinTrip }) => {
 							: trip.start_location === tripData.start_location ||
 									trip.end_location ===
 										tripData.end_location ||
-									trip.vehicle_type === tripData.vehicle_type;
+									trip.vehicle_type ===
+										tripData.vehicle_type ||
+									trip.start_date === tripData.start_date;
 					})
 
 					.map(
@@ -171,7 +166,8 @@ const Join = ({ getAllTrips, joinTrip }) => {
 								/>
 							);
 						},
-					)}
+					)
+			)}
 			<Sidebar />
 		</div>
 	);

@@ -49,7 +49,7 @@
 	border-radius: 50%;
 	transform: translateY(-65%);
 	margin: 0 auto;
-	z-index: 99999999;
+	z-index: 998;
 }
 .trip-type-icon {
 	position: absolute;

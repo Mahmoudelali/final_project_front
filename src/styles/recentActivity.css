@@ -18,6 +18,7 @@
 	background: rgba(55, 55, 55, 0.1);
 	color: rgb(66, 66, 66);
 	border-radius: 50%;
+	border: 1px solid rgba(100, 50, 50);
 }
 
 .recent-activity-top p {

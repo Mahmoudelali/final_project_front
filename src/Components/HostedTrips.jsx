@@ -24,7 +24,7 @@ const HostedTrips = () => {
 						color: '#191933',
 					}}
 				>
-					hosted trips
+					Hosted Trips
 				</h2>
 				{userTrips &&
 					userTrips.map(
@@ -54,7 +54,13 @@ const HostedTrips = () => {
 											date={start_date}
 										/>
 									</div>
-									<div>
+									<div
+										style={{
+											position: 'relative',
+											paddingLeft: '15px',
+										}}
+									>
+										<span className="card-separator"></span>
 										<span className="block">
 											<strong>Created at</strong>{' '}
 											{createdAt.substring(0, 10)}

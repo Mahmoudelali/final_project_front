@@ -13,19 +13,34 @@
 .middle {
 	vertical-align: middle;
 }
+.homepage-container {
+	padding-top: 10vh;
+}
 .homepage-container header {
+	z-index: 9999;
+	background-color: var(--violet-color);
+	color: white !important;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	max-height: 8vh;
+	overflow: hidden;
 }
 .brand-container {
-	height: 200px;
-	margin-top: -60px;
-	font-size: 3rem !important;
+	height: 8vh;
+	width: 50%;
 }
 
 .brand-container img {
-	height: 100%;
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	max-height: 100%;
 	object-fit: cover;
 }
 .toggle-icons {
@@ -39,7 +54,7 @@
 	position: absolute;
 	top: 0;
 	right: 0;
-	color: var(--white-color);
+
 	margin: 0.5rem;
 }
 .side-collapse-toggle svg {
@@ -152,7 +167,7 @@
 .hosted-trips-container article {
 	background-color: rgba(242, 242, 242, 0.682);
 	border: 1px solid rgb(222, 222, 222);
-	padding: 10px;
+	padding: 15px 10px;
 	border-radius: 10px;
 	display: flex;
 	margin-bottom: 1rem;
@@ -176,10 +191,22 @@
 	font-size: 14px;
 }
 .hosted-trips-container article div:nth-child(2) span {
-	line-height: 1.8;
+	line-height: 1.7;
 }
 .hosted-trips-container article strong {
 	letter-spacing: 0.8px;
 	color: rgb(41, 41, 41);
 	text-transform: capitalize;
+	font-size: 15px;
+	font-weight: 600;
+}
+
+.card-separator {
+	position: absolute;
+	/* background-color: lightgray; */
+	border-left: 1px dashed gray;
+	height: 80%;
+	width: 1px;
+	top: 10%;
+	left: 0;
 }

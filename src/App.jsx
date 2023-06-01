@@ -18,7 +18,7 @@ import React, { useEffect, useState } from 'react';
 import Join from './pages/Join.jsx';
 import Profile from './Components/Profile.jsx';
 
-import pickmeup_violet from './assets/pickmeup logo variations -04.svg';
+import pickmeup_violet from './assets/pickmeup logo variations -06.svg';
 import PreviewTrip from './Components/PreviewTrip.jsx';
 import TripDetails from './Components/Trip_Details.jsx';
 import HostedTrips from './Components/HostedTrips.jsx';
@@ -83,7 +83,6 @@ const createTrip = (e, trip_data, form) => {
 					title: 'Trip Added Successfully',
 				});
 			form.reset();
-
 			getAllTrips();
 		})
 		.catch((err) => {
@@ -157,15 +156,15 @@ function App() {
 	);
 	return (
 		<div className="homepage-container">
-			<button
-				onClick={() => {
-					setSidebarExpanded(!sidebarExpanded);
-				}}
-				className="toggle-icons unset"
-			>
-				{!sidebarExpanded ? <MenuIcon /> : <CloseIcon />}
-			</button>
 			<header>
+				<button
+					onClick={() => {
+						setSidebarExpanded(!sidebarExpanded);
+					}}
+					className="toggle-icons unset"
+				>
+					{!sidebarExpanded ? <MenuIcon /> : <CloseIcon />}
+				</button>
 				<div className="brand-container">
 					<img src={pickmeup_violet} alt="" />
 				</div>
