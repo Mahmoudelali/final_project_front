@@ -12,7 +12,8 @@ import PlaceIcon from '@mui/icons-material/Place';
 import CloseIcon from '@mui/icons-material/Close';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
-import InfoIcon from '@mui/icons-material/Info';
+import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
+import ZoomInMapIcon from '@mui/icons-material/ZoomInMap';
 
 import { Grid } from '@mui/material';
 import noImage from '../assets/PROFILE.jpg';
@@ -49,6 +50,7 @@ const PreviewTrip = ({
 
 	const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_KEY;
 	const [loadMap, setLoadMap] = useState(false);
+	const [detailsExpanded, setDetailsExpanded] = useState(false);
 
 	useEffect(() => {
 		const options = {
@@ -149,12 +151,15 @@ const PreviewTrip = ({
 						borderTopRightRadius: '10px',
 						overflow: 'hidden',
 						width: '100%',
-						height: '150px',
+						transition: '.2s',
 						position: 'absolute',
 						top: 0,
 						left: 0,
 						zIndex: 0,
 					}}
+					className={
+						!detailsExpanded ? 'map-card-height' : 'map-height-100'
+					}
 				>
 					{!loadMap ? (
 						<span>Loading maps ...</span>
@@ -169,7 +174,7 @@ const PreviewTrip = ({
 						flexWrap: 'wrap',
 						padding: '5rem 0.7rem 0rem 0.7rem',
 						justifyContent: 'space-between',
-						rowGap: '1rem',
+						rowGap: '.5rem',
 					}}
 				>
 					<span style={{ flexBasis: '50%' }} className="block">
@@ -280,13 +285,19 @@ const PreviewTrip = ({
 								padding: '9px',
 								borderRadius: '10px',
 								color: '#191933',
+								zIndex: 99999999,
+								backgroundColor: detailsExpanded && 'white',
 							}}
 							onClick={() => {
-								console.log('clicked');
-								navigate(`/trips/${tripID}`);
+								setDetailsExpanded(!detailsExpanded);
+								// navigate(`/trips/${tripID}`);
 							}}
 						>
-							<InfoIcon className="middle" />
+							{!detailsExpanded ? (
+								<ZoomOutMapIcon className="middle" />
+							) : (
+								<ZoomInMapIcon className="middle" />
+							)}
 						</button>
 					</div>
 				)}

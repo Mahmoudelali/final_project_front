@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
-import pickmeup_violet from '../assets/pickmeup logo variations -04.svg';
-import { Outlet } from 'react-router-dom';
+
+import { Outlet, NavLink } from 'react-router-dom';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import { sidebarStatus } from '../App.jsx';
@@ -28,6 +28,19 @@ const Home = ({ getAllTrips }) => {
 			</button>
 			<Sidebar />
 			<main>
+				<div className="home-hero-section">
+					<div>
+						<h1>
+							Contribute to a Healthier, Greener, and Cleaner
+							world ! <br />
+							Start Carpooling
+						</h1>
+						<div className="btns-container">
+							<NavLink to={'/new'}>Host a Trip</NavLink>
+							<NavLink to={'/trips/join'}>Join One</NavLink>
+						</div>
+					</div>
+				</div>
 				{!trips ? (
 					<Loader component_loading={true} />
 				) : trips && trips.length === 0 ? (
