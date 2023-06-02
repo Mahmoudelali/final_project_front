@@ -5,12 +5,7 @@ import './index.css';
 import { AuthProvider } from 'react-auth-kit';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-	<AuthProvider
-		authType={'localstorge'}
-		authName={'_auth'}
-		cookieDomain={window.location.hostname}
-		cookieSecure={window.location.protocol === 'https:'}
-	>
+	
 		<App />
-	</AuthProvider>,
+	
 );

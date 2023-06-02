@@ -2,26 +2,20 @@ import React, { useState } from 'react';
 import { useSignIn } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import Loader from '../Components/Loader';
+
 import carpooling_image from '../../src/assets/carpool-concept-illustration_114360-9258.avif';
 
 import '../styles/login.css';
 
 import axios from 'axios';
-// import pickmeup_violet from '../assets/pickmeup logo variations -04.svg';
-// import pickmeup_charcoal from '../assets/pickmeup logo variations -03.svg';
-import pickmeup_charcoal from '../assets/pickmeup logo variations -04.svg'; //
-// import pickmeup from '../assets/pickmeup logo variations -05.svg';
-import Cookies from 'js-cookie';
+
 const Login = () => {
 	const navigate = useNavigate();
-	const nodeEnv = import.meta.env.VITE_APP_URL;
 	const signIn = useSignIn();
-
+	const nodeEnv = import.meta.env.VITE_APP_URL;
 	const [hasAccount, setHasAccount] = useState(true);
 	const [userData, setUserData] = useState({});
 	const [loading, setLoading] = useState(false);
-	console.log(userData);
 	const handleInputChange = (e) => {
 		setUserData({ ...userData, [e.target.name]: e.target.value });
 	};
@@ -75,7 +69,6 @@ const Login = () => {
 						authState: res.data.response,
 					})
 				) {
-					console.log('test', res.data.response);
 					navigate('/');
 				} else {
 					alert('wrong creds');
@@ -105,7 +98,6 @@ const Login = () => {
 		}
 	};
 	const switchers = [...document.querySelectorAll('.switcher')];
-
 	switchers.forEach((item) => {
 		item.addEventListener('click', function () {
 			switchers.forEach((item) =>
@@ -117,7 +109,7 @@ const Login = () => {
 
 	return !hasAccount ? (
 		<>
-			<h1 className="center title">Welcome !</h1>
+			<h1 className="center title">Welcome To Pickmeup!</h1>
 			<div className="login-container">
 				<div className="window">
 					<div className="overlay" />

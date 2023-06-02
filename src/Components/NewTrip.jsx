@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import Cookies from 'js-cookie';
+
 import PlaceIcon from '@mui/icons-material/Place';
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import DescriptionIcon from '@mui/icons-material/Description';
@@ -12,7 +12,7 @@ import '../styles/test.css';
 import { useAuthUser } from 'react-auth-kit';
 
 const NewTrip = ({ createTrip }) => {
-	const userInfo = useAuthUser()
+	const userInfo = useAuthUser();
 	const [previewExpanded, setPreviewExpanded] = useState(false);
 	const [free, setFree] = useState(true);
 

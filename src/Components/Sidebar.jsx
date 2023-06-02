@@ -61,18 +61,11 @@ const sideLinks = [
 	},
 ];
 const Sidebar = ({ profile, rate }) => {
-	const [logout, setLogout] = useState(false);
 	const [sidebarExpanded, setSidebarExpanded] = useContext(sidebarStatus);
 	const userData = useAuthUser();
 	const navigate = useNavigate();
-	// console.log(userData());
 	const signOut = useSignOut();
-	useEffect(() => {
-		if (logout) {
-			signOut();
-			navigate('/login');
-		}
-	}, [logout]);
+
 	return (
 		<div
 			className={
@@ -153,7 +146,9 @@ const Sidebar = ({ profile, rate }) => {
 					style={{ marginTop: 'auto' }}
 					onClick={() => {
 						setSidebarExpanded(!setSidebarExpanded);
-						setLogout(true);
+
+						signOut();
+						navigate('/login');
 					}}
 				>
 					<ExitToAppIcon sx={{ verticalAlign: 'middle	' }} />

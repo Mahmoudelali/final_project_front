@@ -1,26 +1,25 @@
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { AuthProvider, RequireAuth } from 'react-auth-kit';
+
 import axios from 'axios';
-
-
 
 import Login from './pages/Login.jsx';
 import Home from './pages/Home.jsx';
 import Welcome from './Components/Welcome.jsx';
 import NewTrip from './Components/NewTrip.jsx';
-import Swal from 'sweetalert2';
 
 // authentication kit
-import { AuthProvider, RequireAuth } from 'react-auth-kit';
+
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Join from './pages/Join.jsx';
 import Profile from './Components/Profile.jsx';
 
-
-import PreviewTrip from './Components/PreviewTrip.jsx';
 import TripDetails from './Components/Trip_Details.jsx';
 import HostedTrips from './Components/HostedTrips.jsx';
 import Layout from './Components/Layout.jsx';
+
+import Swal from 'sweetalert2';
 
 export const sidebarStatus = React.createContext();
 
@@ -35,6 +34,7 @@ const Toast = Swal.mixin({
 		toast.addEventListener('mouseleave', Swal.resumeTimer);
 	},
 });
+
 export const joinTrip = ({ trip_id, user_id }) => {
 	axios
 		.post(
@@ -150,49 +150,58 @@ export const getTripsByUserID = (id, handler) => {
 		});
 };
 function App() {
-	const [sidebarExpanded, setSidebarExpanded] = useState(
-		screen.width > 468 ? true : false,
-	);
+	const [sidebarExpanded, setSidebarExpanded] = useState(false);
 	return (
 		<div className="homepage-container">
-			
-
 			<sidebarStatus.Provider
 				value={[sidebarExpanded, setSidebarExpanded]}
 			>
-				<BrowserRouter>
-					<Routes>
-						<Route
-								path="/welcome"
-								element={<Welcome />}
-							></Route>
-						<Route exact path="/login" element={<Login />} />
+				<AuthProvider
+					authType={'localstorge'}
+					authName={'_auth'}
+					cookieDomain={window.location.hostname}
+					cookieSecure={window.location.protocol === 'https:'}
+				>
+					<BrowserRouter>
+						<Routes>
+							<Route exact path="/login" element={<Login />} />
 
-						<Route path="/" exact element={<Layout />}>
 							<Route
 								path="/"
-								element={<Home getAllTrips={getAllTrips} />}
-							/>
-							<Route
-								path="/new"
-								element={<NewTrip createTrip={createTrip} />}
-							/>
-							<Route path="/profile" element={<Profile />} />
-							<Route
-								path="/trips/join"
-								element={<Join getAllTrips={getAllTrips} />}
-							></Route>
-							<Route
-								path="/trips/hosted"
-								element={<HostedTrips />}
-							></Route>
-							<Route
-								path="/trips/:id"
-								element={<TripDetails />}
-							/>
-						</Route>
-					</Routes>
-				</BrowserRouter>
+								exact
+								element={
+									<RequireAuth loginPath="/login">
+										<Layout />
+									</RequireAuth>
+								}
+							>
+								<Route
+									path="/"
+									element={<Home getAllTrips={getAllTrips} />}
+								/>
+								<Route
+									path="/new"
+									element={
+										<NewTrip createTrip={createTrip} />
+									}
+								/>
+								<Route path="/profile" element={<Profile />} />
+								<Route
+									path="/trips/join"
+									element={<Join getAllTrips={getAllTrips} />}
+								></Route>
+								<Route
+									path="/trips/hosted"
+									element={<HostedTrips />}
+								></Route>
+								<Route
+									path="/trips/:id"
+									element={<TripDetails />}
+								/>
+							</Route>
+						</Routes>
+					</BrowserRouter>
+				</AuthProvider>
 			</sidebarStatus.Provider>
 		</div>
 	);

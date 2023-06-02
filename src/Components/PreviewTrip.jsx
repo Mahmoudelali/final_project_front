@@ -46,7 +46,7 @@ const PreviewTrip = ({
 		end_spot && JSON.parse(end_spot).lng,
 	]; // Replace with actual destination coordinates
 	const userData = useAuthUser();
-	const userID = userData()._id;
+	// const userID = userData()._id;
 	const navigate = useNavigate();
 	const [detailsExpanded, setDetailsExpanded] = useState(false);
 
@@ -234,7 +234,7 @@ const PreviewTrip = ({
 					>
 						<button
 							onClick={() => {
-								joinTrip({ trip_id: tripID, user_id: userID }); //userID
+								// joinTrip({ trip_id: tripID, user_id: userID }); //userID
 							}}
 							className="join-trip unset"
 							style={{

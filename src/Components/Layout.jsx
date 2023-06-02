@@ -20,7 +20,7 @@ function Layout() {
 					{!sidebarExpanded ? <MenuIcon /> : <CloseIcon />}
 				</button>
 				<div className="brand-container">
-					<img src={pickmeup_violet} alt="" />
+					<img src={pickmeup_violet} alt="brand image" />
 				</div>
 			</header>
 
