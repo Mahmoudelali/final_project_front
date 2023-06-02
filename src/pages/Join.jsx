@@ -10,6 +10,7 @@ import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import DescriptionIcon from '@mui/icons-material/Description';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import Loader from '../Components/Loader.jsx';
+import Map from '../Components/Map.jsx';
 
 const Join = ({ getAllTrips, joinTrip }) => {
 	const [trips, setTrips] = useState({});
@@ -26,6 +27,7 @@ const Join = ({ getAllTrips, joinTrip }) => {
 	return (
 		<div className="join-trip-container" style={{ paddingBottom: '2rem' }}>
 			<Outlet />
+
 			<form
 				style={{
 					background: '#fff3cf',

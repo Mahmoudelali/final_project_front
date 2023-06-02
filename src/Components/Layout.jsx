@@ -4,6 +4,7 @@ import { useContext } from 'react';
 import MenuIcon from '@mui/icons-material/Menu';
 import CloseIcon from '@mui/icons-material/Close';
 import pickmeup_violet from '../assets/pickmeup logo variations -06.svg';
+import Sidebar from './Sidebar';
 
 function Layout() {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(sidebarStatus);
@@ -23,7 +24,7 @@ function Layout() {
 					<img src={pickmeup_violet} alt="brand image" />
 				</div>
 			</header>
-
+			<Sidebar />
 			<main>
 				<Outlet />
 			</main>

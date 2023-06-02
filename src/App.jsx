@@ -1,6 +1,7 @@
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import { AuthProvider, RequireAuth } from 'react-auth-kit';
 
+
 import axios from 'axios';
 
 import Login from './pages/Login.jsx';
@@ -34,6 +35,8 @@ const Toast = Swal.mixin({
 		toast.addEventListener('mouseleave', Swal.resumeTimer);
 	},
 });
+
+
 
 export const joinTrip = ({ trip_id, user_id }) => {
 	axios

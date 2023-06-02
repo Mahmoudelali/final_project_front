@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Cookies from 'js-cookie';
 import '../styles/previewTrip.css';
 
@@ -14,12 +14,13 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import InfoIcon from '@mui/icons-material/Info';
 
-import { joinTrip } from '../App.jsx';
 import { Grid } from '@mui/material';
 import noImage from '../assets/PROFILE.jpg';
 import Map from './Map.jsx';
 import { useNavigate } from 'react-router-dom';
 import { useAuthUser } from 'react-auth-kit';
+
+import { Loader } from '@googlemaps/js-api-loader';
 
 const PreviewTrip = ({
 	tripID,
@@ -40,15 +41,38 @@ const PreviewTrip = ({
 	const origin = [
 		start_spot && JSON.parse(start_spot).lat,
 		start_spot && JSON.parse(start_spot).lng,
-	]; // Replace with actual origin coordinates
+	];
 	const destination = [
 		end_spot && JSON.parse(end_spot).lat,
 		end_spot && JSON.parse(end_spot).lng,
-	]; // Replace with actual destination coordinates
+	];
+
+	const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_KEY;
+	const [loadMap, setLoadMap] = useState(false);
+
+	useEffect(() => {
+		const options = {
+			apiKey: GOOGLE_MAP_API_KEY,
+			version: 'weekly',
+			libraries: ['geometry'],
+		};
+
+		new Loader(options)
+			.load()
+			.then(() => {
+				setLoadMap(true);
+			})
+			.catch((e) => {
+				console.error(
+					'Sorry, something went wrong: Please try again later. Error:',
+					e,
+				);
+			});
+	}, []);
+
 	const userData = useAuthUser();
 	// const userID = userData()._id;
 	const navigate = useNavigate();
-	const [detailsExpanded, setDetailsExpanded] = useState(false);
 
 	return (
 		<article
@@ -129,12 +153,14 @@ const PreviewTrip = ({
 						position: 'absolute',
 						top: 0,
 						left: 0,
-
 						zIndex: 0,
-						backgroundColor: 'lightblue',
 					}}
 				>
-					<Map origin={origin} destination={destination} />
+					{!loadMap ? (
+						<span>Loading maps ...</span>
+					) : (
+						<Map origin={origin} destination={destination} />
+					)}
 				</div>
 				<div
 					style={{
@@ -258,7 +284,6 @@ const PreviewTrip = ({
 							onClick={() => {
 								console.log('clicked');
 								navigate(`/trips/${tripID}`);
-								setDetailsExpanded(!detailsExpanded);
 							}}
 						>
 							<InfoIcon className="middle" />

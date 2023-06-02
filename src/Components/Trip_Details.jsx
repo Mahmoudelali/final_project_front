@@ -11,9 +11,8 @@ const TripDetails = ({ detailsExpanded, setDetailsExpanded }) => {
 		getTripByID({
 			trip_id: id.id,
 			stateHandler: setTrip,
-		}),
-			[];
-	});
+		});
+	}, []);
 	console.log(trips);
 
 	return (
