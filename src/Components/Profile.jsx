@@ -3,12 +3,14 @@ import '../styles/profile.css';
 import profile from '../assets/PROFILE.jpg';
 import Sidebar from './Sidebar';
 import Cookies from 'js-cookie';
+import { useAuthUser } from 'react-auth-kit';
 
 const Profile = () => {
-	const userData = Cookies.get('user') && JSON.parse(Cookies.get('user'));
+	// const userData = Cookies.get('user') && JSON.parse(Cookies.get('user'));
+	const userData=useAuthUser()
 	const { first_name, last_name, joined_trips, hosted_trips, phone } =
-		userData;
-	console.log(userData);
+		userData();
+	console.log(userData());
 	return (
 		<div className="user-profile-card-container">
 			<Sidebar />

@@ -1,10 +1,8 @@
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import axios from 'axios';
 
-import MenuIcon from '@mui/icons-material/Menu';
-import CloseIcon from '@mui/icons-material/Close';
 
-import Sidebar from './Components/Sidebar.jsx';
+
 import Login from './pages/Login.jsx';
 import Home from './pages/Home.jsx';
 import Welcome from './Components/Welcome.jsx';
@@ -18,10 +16,11 @@ import React, { useEffect, useState } from 'react';
 import Join from './pages/Join.jsx';
 import Profile from './Components/Profile.jsx';
 
-import pickmeup_violet from './assets/pickmeup logo variations -06.svg';
+
 import PreviewTrip from './Components/PreviewTrip.jsx';
 import TripDetails from './Components/Trip_Details.jsx';
 import HostedTrips from './Components/HostedTrips.jsx';
+import Layout from './Components/Layout.jsx';
 
 export const sidebarStatus = React.createContext();
 
@@ -156,44 +155,23 @@ function App() {
 	);
 	return (
 		<div className="homepage-container">
-			<header>
-				<button
-					onClick={() => {
-						setSidebarExpanded(!sidebarExpanded);
-					}}
-					className="toggle-icons unset"
-				>
-					{!sidebarExpanded ? <MenuIcon /> : <CloseIcon />}
-				</button>
-				<div className="brand-container">
-					<img src={pickmeup_violet} alt="" />
-				</div>
-			</header>
-			<AuthProvider
-				authType={'cookie'}
-				authName={'auth_token'}
-				cookieDomain={window.location.hostname}
-				cookieSecure={false}
+			
+
+			<sidebarStatus.Provider
+				value={[sidebarExpanded, setSidebarExpanded]}
 			>
-				<sidebarStatus.Provider
-					value={[sidebarExpanded, setSidebarExpanded]}
-				>
-					<BrowserRouter>
-						<Routes>
-							<Route
+				<BrowserRouter>
+					<Routes>
+						<Route
 								path="/welcome"
 								element={<Welcome />}
 							></Route>
-							<Route exact path="/login" element={<Login />} />
+						<Route exact path="/login" element={<Login />} />
 
+						<Route path="/" exact element={<Layout />}>
 							<Route
 								path="/"
-								exact
-								element={
-									<RequireAuth loginPath="/login">
-										<Home getAllTrips={getAllTrips} />
-									</RequireAuth>
-								}
+								element={<Home getAllTrips={getAllTrips} />}
 							/>
 							<Route
 								path="/new"
@@ -212,14 +190,10 @@ function App() {
 								path="/trips/:id"
 								element={<TripDetails />}
 							/>
-						</Routes>
-					</BrowserRouter>
-				</sidebarStatus.Provider>
-			</AuthProvider>
-			<main>
-				{/* <Sidebar /> */}
-				<Outlet />
-			</main>
+						</Route>
+					</Routes>
+				</BrowserRouter>
+			</sidebarStatus.Provider>
 		</div>
 	);
 }

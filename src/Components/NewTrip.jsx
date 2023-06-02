@@ -9,14 +9,15 @@ import lebaneseCities from '../assets/lb.json';
 import Sidebar from './Sidebar.jsx';
 import Passengers from './Passengers.jsx';
 import '../styles/test.css';
+import { useAuthUser } from 'react-auth-kit';
 
 const NewTrip = ({ createTrip }) => {
-	const userInfo = JSON.parse(Cookies.get('user'));
+	const userInfo = useAuthUser()
 	const [previewExpanded, setPreviewExpanded] = useState(false);
 	const [free, setFree] = useState(true);
 
 	const [tripData, setTripData] = useState({
-		host_name: userInfo._id,
+		host_name: userInfo()._id,
 		start_location: ``,
 		end_location: ``,
 		start_date: Date.now(),
@@ -57,7 +58,7 @@ const NewTrip = ({ createTrip }) => {
 				<PreviewTrip
 					setPreviewExpanded={setPreviewExpanded}
 					previewExpanded={previewExpanded}
-					host_name={userInfo.first_name}
+					host_name={userInfo().first_name}
 					profile={'profile'}
 					approved_passengers={5}
 					vehicle_type={vehicle_type}

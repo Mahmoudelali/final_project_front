@@ -19,6 +19,7 @@ import { Grid } from '@mui/material';
 import noImage from '../assets/PROFILE.jpg';
 import Map from './Map.jsx';
 import { useNavigate } from 'react-router-dom';
+import { useAuthUser } from 'react-auth-kit';
 
 const PreviewTrip = ({
 	tripID,
@@ -44,8 +45,8 @@ const PreviewTrip = ({
 		end_spot && JSON.parse(end_spot).lat,
 		end_spot && JSON.parse(end_spot).lng,
 	]; // Replace with actual destination coordinates
-
-	const userID = JSON.parse(Cookies.get('user'))._id;
+	const userData = useAuthUser();
+	const userID = userData()._id;
 	const navigate = useNavigate();
 	const [detailsExpanded, setDetailsExpanded] = useState(false);
 

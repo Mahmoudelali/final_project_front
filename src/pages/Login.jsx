@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useSignIn } from 'react-auth-kit';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import Loader from '../Components/Loader';
+import carpooling_image from '../../src/assets/carpool-concept-illustration_114360-9258.avif';
 
 import '../styles/login.css';
 
@@ -18,6 +20,7 @@ const Login = () => {
 
 	const [hasAccount, setHasAccount] = useState(true);
 	const [userData, setUserData] = useState({});
+	const [loading, setLoading] = useState(false);
 	console.log(userData);
 	const handleInputChange = (e) => {
 		setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -34,7 +37,6 @@ const Login = () => {
 		},
 	});
 	const addNewUser = () => {
-		console.log('clicked');
 		axios
 			.post(`${nodeEnv}/api/user/create`, {
 				phone: userData.phone,
@@ -64,6 +66,7 @@ const Login = () => {
 			.post(`${nodeEnv}/api/user/login`, userData)
 			.then((res) => {
 				console.log(res);
+				res.status === 200 && setLoading(false);
 				if (
 					signIn({
 						token: res.data.token,
@@ -72,11 +75,10 @@ const Login = () => {
 						authState: res.data.response,
 					})
 				) {
-					Cookies.set('user', JSON.stringify(res.data.response));
-
+					console.log('test', res.data.response);
 					navigate('/');
 				} else {
-					navigate('/login');
+					alert('wrong creds');
 				}
 			})
 			.catch((err) => {
@@ -115,6 +117,7 @@ const Login = () => {
 
 	return !hasAccount ? (
 		<>
+			<h1 className="center title">Welcome !</h1>
 			<div className="login-container">
 				<div className="window">
 					<div className="overlay" />
@@ -206,7 +209,15 @@ const Login = () => {
 	) : (
 		<>
 			<div className="login-container">
-				<div className="window">
+				<h1 className="center title">Welcome !</h1>
+				<form
+					className="window"
+					onSubmit={(e) => {
+						e.preventDefault();
+						loginUSer();
+						setLoading(true);
+					}}
+				>
 					<div className="overlay" />
 					<div className="content">
 						<div
@@ -246,6 +257,7 @@ const Login = () => {
 						<div className="spacing">
 							didn't Register yet?
 							<button
+								type="button"
 								className="highlight"
 								style={{
 									all: 'unset',
@@ -260,15 +272,21 @@ const Login = () => {
 							</button>
 							<button
 								type="submit"
-								onClick={() => {
-									loginUSer();
-								}}
+								disabled={loading && true}
 								className="ghost-round full-width"
+								style={{
+									backgroundColor: loading && 'lightgray',
+									color: loading && 'white',
+									border: loading && 0,
+								}}
 							>
 								Login
 							</button>
 						</div>
 					</div>
+				</form>
+				<div className="illustration">
+					<img src={carpooling_image} />
 				</div>
 			</div>
 		</>

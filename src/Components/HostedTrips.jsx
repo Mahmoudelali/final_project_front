@@ -4,9 +4,12 @@ import Cookies from 'js-cookie';
 import Sidebar from './Sidebar.jsx';
 import Passengers from './Passengers.jsx';
 import RecentActivity from './RecentActivity.jsx';
+import { useAuthUser } from 'react-auth-kit';
 
 const HostedTrips = () => {
-	const user_id = JSON.parse(Cookies.get('user'))._id;
+	// const user_id = JSON.parse(Cookies.get('user'))._id;
+	const userData = useAuthUser();
+	const user_id = userData()._id;
 	const [userTrips, setUserTrips] = useState(null);
 	useEffect(() => {
 		getTripsByUserID(user_id, setUserTrips);

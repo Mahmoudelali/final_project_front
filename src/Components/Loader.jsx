@@ -1,7 +1,7 @@
 import React from 'react';
 import '../styles//Loader.css';
 
-const Loader = ({ component_loading }) => {
+const Loader = ({ component_loading, width, height }) => {
 	return (
 		<div
 			className="loader-container"
@@ -13,7 +13,6 @@ const Loader = ({ component_loading }) => {
 			}}
 		>
 			<span className="loader"></span>
-            
 		</div>
 	);
 };

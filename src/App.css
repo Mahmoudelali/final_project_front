@@ -13,8 +13,17 @@
 .middle {
 	vertical-align: middle;
 }
+.center {
+	text-align: center;
+}
+.title {
+	color: var(--charcoal-color);
+	font-weight: 300;
+	margin-bottom: 2rem;
+	font-size: 2.5rem;
+}
 .homepage-container {
-	padding-top: 10vh;
+	padding-top: 8vh;
 }
 .homepage-container header {
 	z-index: 9999;

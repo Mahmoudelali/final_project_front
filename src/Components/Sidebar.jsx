@@ -1,16 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { sidebarStatus } from '../App.jsx';
 import StarIcon from '@mui/icons-material/Star';
 import noImage from '../assets/PROFILE.jpg';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import CloseIcon from '@mui/icons-material/Close';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import CommuteIcon from '@mui/icons-material/Commute';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import Cookies from 'js-cookie';
-import { useSignOut } from 'react-auth-kit';
+import { useAuthUser, useSignOut } from 'react-auth-kit';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import GroupsIcon from '@mui/icons-material/Groups';
 
@@ -61,9 +61,18 @@ const sideLinks = [
 	},
 ];
 const Sidebar = ({ profile, rate }) => {
+	const [logout, setLogout] = useState(false);
 	const [sidebarExpanded, setSidebarExpanded] = useContext(sidebarStatus);
-	const userData = JSON.parse(Cookies.get('user'));
+	const userData = useAuthUser();
+	const navigate = useNavigate();
+	// console.log(userData());
 	const signOut = useSignOut();
+	useEffect(() => {
+		if (logout) {
+			signOut();
+			navigate('/login');
+		}
+	}, [logout]);
 	return (
 		<div
 			className={
@@ -83,7 +92,7 @@ const Sidebar = ({ profile, rate }) => {
 					<img src={!profile ? noImage : profile} alt="profile" />
 				</div>
 				<p>
-					<span>{userData.first_name || 'Mahmoud'}</span> |{' '}
+					<span>{userData().first_name || 'Mahmoud'}</span> |{' '}
 					<span>
 						<strong> {rate || '4.3'}</strong>
 					</span>
@@ -144,7 +153,7 @@ const Sidebar = ({ profile, rate }) => {
 					style={{ marginTop: 'auto' }}
 					onClick={() => {
 						setSidebarExpanded(!setSidebarExpanded);
-						signOut();
+						setLogout(true);
 					}}
 				>
 					<ExitToAppIcon sx={{ verticalAlign: 'middle	' }} />
