@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/profile.css';
 import profile from '../assets/PROFILE.jpg';
+import Cookies from 'js-cookie';
 import { useAuthUser } from 'react-auth-kit';
 import Swal from 'sweetalert2';
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
@@ -9,17 +10,10 @@ import axios from 'axios';
 const Profile = () => {
 	// const userData = Cookies.get('user') && JSON.parse(Cookies.get('user'));
 	const userData = useAuthUser();
-	const {
-		first_name,
-		last_name,
-		joined_trips,
-		hosted_trips,
-		phone,
-		_id,
-		image,
-	} = userData();
+	let { first_name, last_name, joined_trips, hosted_trips, phone, _id } =
+		userData();
 	const [cloudImageURL, setCloudImageURL] = useState('');
-	console.log(cloudImageURL);
+	const image = Cookies.get('userImage');
 	return (
 		<div
 			className="user-profile-card-container"
@@ -58,21 +52,28 @@ const Profile = () => {
 								formData,
 							)
 							.then((response) => {
-								setCloudImageURL(response.data.data.url);
-								console.log(response, cloudImageURL);
-								axios
-									.put(
-										`${
-											import.meta.env.VITE_APP_URL
-										}/api/user/update/${_id}`,
-										{
-											image: cloudImageURL,
-										},
-										{ new: true },
-									)
-									.then((response) => {
-										console.log(response);
-									});
+								Cookies.set(
+									'userImage',
+									response.data.data.url,
+								);
+
+								response.status === 200 &&
+									axios
+										.put(
+											`${
+												import.meta.env.VITE_APP_URL
+											}/api/user/update/${_id}`,
+											{
+												image: cloudImageURL,
+											},
+											{ new: true },
+										)
+										.then((response) => {
+											setCloudImageURL(
+												Cookies.get('userImage'),
+											);
+											console.log(response);
+										});
 							})
 
 							.catch((err) => console.log(err.message));

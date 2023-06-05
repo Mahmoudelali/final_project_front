@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSignIn } from 'react-auth-kit';
-import { redirect, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
 import Swal from 'sweetalert2';
 
 import carpooling_image from '../../src/assets/carpool-concept-illustration_114360-9258.avif';

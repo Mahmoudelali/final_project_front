@@ -187,6 +187,10 @@ function App() {
 									element={<Home getAllTrips={getAllTrips} />}
 								/>
 								<Route
+									path="*"
+									element={<Home getAllTrips={getAllTrips} />}
+								/>
+								<Route
 									path="/new"
 									element={
 										<NewTrip createTrip={createTrip} />

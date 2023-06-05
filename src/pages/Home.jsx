@@ -63,7 +63,6 @@ const Home = ({ getAllTrips }) => {
 								description,
 								start_time,
 							}) => {
-								console.log(host_name.first_name);
 								return (
 									<PreviewTrip
 										setTrips={setTrips}

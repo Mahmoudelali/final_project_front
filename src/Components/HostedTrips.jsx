@@ -18,9 +18,7 @@ const HostedTrips = () => {
 
 	return (
 		<div>
-			<Sidebar />
-
-			<div className="hosted-trips-container">
+			<div className="hosted-trips-container" style={{paddingTop : '10vh'}}>
 				<h2
 					style={{
 						textAlign: 'center',

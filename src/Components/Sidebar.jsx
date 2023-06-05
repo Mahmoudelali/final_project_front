@@ -15,6 +15,7 @@ import HandshakeIcon from '@mui/icons-material/Handshake';
 import GroupsIcon from '@mui/icons-material/Groups';
 4;
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import Cookies from 'js-cookie';
 
 const sideLinks = [
 	{
@@ -72,7 +73,7 @@ const Sidebar = ({ rate }) => {
 	const userData = useAuthUser();
 	const navigate = useNavigate();
 	const signOut = useSignOut();
-	const profile = userData.image;
+	const image = Cookies.get('userImage');
 	return (
 		<div
 			className={
@@ -90,7 +91,7 @@ const Sidebar = ({ rate }) => {
 					<CloseIcon />
 				</button>
 				<div className="user-image-container">
-					<img src={!profile ? noImage : profile} alt="profile" />
+					<img src={!image ? noImage : image} alt="profile" />
 				</div>
 				<p>
 					<span>{userData().first_name || 'Mahmoud'}</span> |{' '}
