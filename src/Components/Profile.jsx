@@ -12,8 +12,8 @@ const Profile = () => {
 	const userData = useAuthUser();
 	let { first_name, last_name, joined_trips, hosted_trips, phone, _id } =
 		userData();
-	const [cloudImageURL, setCloudImageURL] = useState('');
 	const image = Cookies.get('userImage');
+	const [cloudImageURL, setCloudImageURL] = useState(image);
 	return (
 		<div
 			className="user-profile-card-container"
