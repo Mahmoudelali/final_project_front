@@ -7,9 +7,7 @@
 .unset {
 	all: unset;
 }
-main > div {
-	padding-top: 8vh;
-}
+
 .block {
 	display: block;
 }
@@ -18,6 +16,9 @@ main > div {
 }
 .center {
 	text-align: center;
+}
+.page-title {
+	font-size: 1.5rem;
 }
 .title {
 	color: var(--charcoal-color);
@@ -145,7 +146,9 @@ main > div {
 	transform: translateX(-200%) !important;
 	transition: 0.5s ease-in-out;
 }
-
+.side-bar ul {
+	list-style: none;
+}
 /* sideBar */
 .user-profile-overall {
 	background-color: var(--charcoal-color);

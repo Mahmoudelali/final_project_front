@@ -15,7 +15,7 @@ const NewTrip = ({ createTrip }) => {
 	const userInfo = useAuthUser();
 	const [previewExpanded, setPreviewExpanded] = useState(false);
 	const [free, setFree] = useState(true);
-
+	console.log(userInfo());
 	const [tripData, setTripData] = useState({
 		host_name: userInfo()._id,
 		start_location: ``,
@@ -45,9 +45,8 @@ const NewTrip = ({ createTrip }) => {
 	} = tripData;
 
 	return (
-		<div>
-			{/* <Passengers /> */}
-			<Sidebar />
+		<div style={{ paddingTop: '10vh' }}>
+			<h1 className="center page-title">Host your trip !</h1>
 			<div
 				className={
 					previewExpanded
@@ -82,6 +81,7 @@ const NewTrip = ({ createTrip }) => {
 						tripData,
 						document.getElementById('new-trip-form'),
 					);
+					setFree(!free);
 				}}
 			>
 				<fieldset>

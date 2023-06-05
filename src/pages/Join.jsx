@@ -25,7 +25,10 @@ const Join = ({ getAllTrips, joinTrip }) => {
 	}, []);
 
 	return (
-		<div className="join-trip-container" style={{ paddingBottom: '2rem' }}>
+		<div
+			className="join-trip-container"
+			style={{ padding: '10vh 0 3rem 0  ' }}
+		>
 			<Outlet />
 
 			<form
@@ -119,7 +122,7 @@ const Join = ({ getAllTrips, joinTrip }) => {
 			</form>
 
 			{trips.length === 0 ? (
-				<Loader isComponent={true} />
+				<Loader />
 			) : (
 				trips.length > 0 &&
 				trips
@@ -164,13 +167,11 @@ const Join = ({ getAllTrips, joinTrip }) => {
 									description={description}
 									passengers={approved_passengers}
 									host_name={host_name.first_name}
-									profile={profile}
 								/>
 							);
 						},
 					)
 			)}
-			<Sidebar />
 		</div>
 	);
 };

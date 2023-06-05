@@ -1,7 +1,6 @@
 import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
 import { AuthProvider, RequireAuth } from 'react-auth-kit';
 
-
 import axios from 'axios';
 
 import Login from './pages/Login.jsx';
@@ -21,12 +20,13 @@ import HostedTrips from './Components/HostedTrips.jsx';
 import Layout from './Components/Layout.jsx';
 
 import Swal from 'sweetalert2';
+import Pending from './Components/Pending.jsx';
 
 export const sidebarStatus = React.createContext();
 
 const Toast = Swal.mixin({
 	toast: true,
-	position: 'top',
+	position: 'center',
 	showConfirmButton: false,
 	timer: 3000,
 	timerProgressBar: true,
@@ -35,8 +35,6 @@ const Toast = Swal.mixin({
 		toast.addEventListener('mouseleave', Swal.resumeTimer);
 	},
 });
-
-
 
 export const joinTrip = ({ trip_id, user_id }) => {
 	axios
@@ -48,13 +46,19 @@ export const joinTrip = ({ trip_id, user_id }) => {
 		)
 		.then((res) => {
 			console.log(res);
-			(res.status === 200) &
+			res.status === 200 &&
 				Toast.fire({
 					icon: 'success',
 					title: 'Join Request Sent!',
 				});
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => {
+			Toast.fire({
+				icon: 'warning',
+				title: err.response.data.error,
+			});
+			console.log(err);
+		});
 };
 export const getAllTrips = (handler) => {
 	axios
@@ -200,6 +204,10 @@ function App() {
 								<Route
 									path="/trips/:id"
 									element={<TripDetails />}
+								/>
+								<Route
+									path="/trips/requests"
+									element={<Pending />}
 								/>
 							</Route>
 						</Routes>

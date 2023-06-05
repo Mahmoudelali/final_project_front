@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useSignIn } from 'react-auth-kit';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 import carpooling_image from '../../src/assets/carpool-concept-illustration_114360-9258.avif';
@@ -21,7 +21,7 @@ const Login = () => {
 	};
 	const Toast = Swal.mixin({
 		toast: true,
-		position: 'top',
+		position: 'bottom',
 		showConfirmButton: false,
 		timer: 3000,
 		timerProgressBar: true,
@@ -39,17 +39,19 @@ const Login = () => {
 				last_name: userData.last_name,
 			})
 			.then((res) => {
+				console.log(res);
 				if (res.data.error) {
 					Toast.fire({
 						icon: 'error',
 						title: 'already exists',
 					});
-				} else {
-					Toast.fire({
-						icon: 'success',
-						title: 'Welcome to PickmeuP',
-					});
 				}
+				Toast.fire({
+					icon: 'success',
+					title: 'Welcome to PickmeuP',
+				});
+
+				res.status == 200 && navigate('/');
 			})
 			.catch((err) => {
 				console.log(err.message);
@@ -76,6 +78,36 @@ const Login = () => {
 			})
 			.catch((err) => {
 				console.log(err);
+			});
+	};
+	const rediretUser = () => {
+		const authData = { phone: userData.phone, password: userData.password };
+		setUserData(authData);
+		axios
+			.post(`${nodeEnv}/api/user/create`, {
+				phone: userData.phone,
+				password: userData.password,
+				first_name: userData.first_name,
+				last_name: userData.last_name,
+			})
+			.then((res) => {
+				console.log(res);
+				if (res.data.error) {
+					Toast.fire({
+						icon: 'error',
+						title: 'already exists',
+					});
+				}
+				res.status == 200 &&
+					Toast.fire({
+						icon: 'success',
+						title: 'Welcome to PickmeuP',
+					});
+
+				loginUSer();
+			})
+			.catch((err) => {
+				console.log(err.message);
 			});
 	};
 	const checkPasswordMatch = (e) => {
@@ -106,6 +138,7 @@ const Login = () => {
 			this.parentElement.classList.add('is-active');
 		});
 	});
+	console.log(userData);
 
 	return !hasAccount ? (
 		<>
@@ -188,7 +221,8 @@ const Login = () => {
 								className="ghost-round full-width"
 								onClick={(e) => {
 									checkPasswordMatch(e);
-									addNewUser();
+
+									rediretUser();
 								}}
 							>
 								Create Account

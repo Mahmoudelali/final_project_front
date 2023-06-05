@@ -14,13 +14,12 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ZoomOutMapIcon from '@mui/icons-material/ZoomOutMap';
 import ZoomInMapIcon from '@mui/icons-material/ZoomInMap';
-
 import { Grid } from '@mui/material';
 import noImage from '../assets/PROFILE.jpg';
 import Map from './Map.jsx';
 import { useNavigate } from 'react-router-dom';
 import { useAuthUser } from 'react-auth-kit';
-
+import { joinTrip } from '../App.jsx';
 import { Loader } from '@googlemaps/js-api-loader';
 
 const PreviewTrip = ({
@@ -51,7 +50,7 @@ const PreviewTrip = ({
 	const GOOGLE_MAP_API_KEY = import.meta.env.VITE_GOOGLE_MAP_KEY;
 	const [loadMap, setLoadMap] = useState(false);
 	const [detailsExpanded, setDetailsExpanded] = useState(false);
-
+	const userID = JSON.parse(localStorage.getItem('_auth_state'))._id;
 	useEffect(() => {
 		const options = {
 			apiKey: GOOGLE_MAP_API_KEY,
@@ -265,7 +264,7 @@ const PreviewTrip = ({
 					>
 						<button
 							onClick={() => {
-								// joinTrip({ trip_id: tripID, user_id: userID }); //userID
+								joinTrip({ trip_id: tripID, user_id: userID }); //userID
 							}}
 							className="join-trip unset"
 							style={{
@@ -290,7 +289,6 @@ const PreviewTrip = ({
 							}}
 							onClick={() => {
 								setDetailsExpanded(!detailsExpanded);
-								// navigate(`/trips/${tripID}`);
 							}}
 						>
 							{!detailsExpanded ? (

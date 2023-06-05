@@ -5,12 +5,13 @@ import Sidebar from './Sidebar.jsx';
 import Passengers from './Passengers.jsx';
 import RecentActivity from './RecentActivity.jsx';
 import { useAuthUser } from 'react-auth-kit';
+import { NavLink } from 'react-router-dom';
 
 const HostedTrips = () => {
 	// const user_id = JSON.parse(Cookies.get('user'))._id;
 	const userData = useAuthUser();
 	const user_id = userData()._id;
-	const [userTrips, setUserTrips] = useState(null);
+	const [userTrips, setUserTrips] = useState([]);
 	useEffect(() => {
 		getTripsByUserID(user_id, setUserTrips);
 	}, []);
@@ -29,7 +30,18 @@ const HostedTrips = () => {
 				>
 					Hosted Trips
 				</h2>
-				{userTrips &&
+				{userTrips.length === 0 ? (
+					<>
+						<h1 className="center page-title">No Trips Found!</h1>
+						<NavLink
+							className={'center'}
+							style={{ display: 'block', marginTop: '.5rem' }}
+							to="/new"
+						>
+							Try Hosting a Trip !
+						</NavLink>
+					</>
+				) : (
 					userTrips.map(
 						({
 							createdAt,
@@ -96,7 +108,8 @@ const HostedTrips = () => {
 								</article>
 							);
 						},
-					)}
+					)
+				)}
 			</div>
 		</div>
 	);

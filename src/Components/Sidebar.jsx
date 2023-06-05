@@ -9,10 +9,12 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import CommuteIcon from '@mui/icons-material/Commute';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import Cookies from 'js-cookie';
+
 import { useAuthUser, useSignOut } from 'react-auth-kit';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import GroupsIcon from '@mui/icons-material/Groups';
+4;
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 const sideLinks = [
 	{
@@ -59,18 +61,24 @@ const sideLinks = [
 		),
 		path: '/trips/joined',
 	},
+	{
+		name: 'Pending Requests',
+		icon: <MoreHorizIcon className="middle" />,
+		path: '/trips/requests',
+	},
 ];
-const Sidebar = ({ profile, rate }) => {
+const Sidebar = ({ rate }) => {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(sidebarStatus);
 	const userData = useAuthUser();
 	const navigate = useNavigate();
 	const signOut = useSignOut();
-
+	const profile = userData.image;
 	return (
 		<div
 			className={
 				sidebarExpanded ? 'side-bar' : 'side-bar side-bar-collapsed'
 			}
+			id="sidebar"
 		>
 			<div className="user-profile-overall">
 				<button
@@ -99,12 +107,19 @@ const Sidebar = ({ profile, rate }) => {
 						/>
 					</span>
 				</p>
-				<NavLink to={'/profile'}>Edit profile</NavLink>
+				<NavLink
+					to={'/profile'}
+					onClick={() => {
+						setSidebarExpanded(!sidebarExpanded);
+					}}
+				>
+					Edit profile
+				</NavLink>
 			</div>
 			<div
 				className="links-container"
 				style={{
-					padding: '10px 0 10px 10px',
+					padding: '10px 0 10px 15px',
 					height: '70%',
 					display: 'flex',
 					flexDirection: 'column',
@@ -143,7 +158,7 @@ const Sidebar = ({ profile, rate }) => {
 
 				<button
 					className="unset"
-					style={{ marginTop: 'auto' }}
+					style={{ marginTop: 'auto', marginBottom: '1.5rem' }}
 					onClick={() => {
 						setSidebarExpanded(!setSidebarExpanded);
 
