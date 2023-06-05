@@ -10,16 +10,23 @@ import axios from 'axios';
 const Profile = () => {
 	// const userData = Cookies.get('user') && JSON.parse(Cookies.get('user'));
 	const userData = useAuthUser();
-	let { first_name, last_name, joined_trips, hosted_trips, phone, _id } =
-		userData();
-	const image = Cookies.get('userImage');
+	let {
+		first_name,
+		last_name,
+		joined_trips,
+		hosted_trips,
+		phone,
+		_id,
+		image,
+	} = userData();
 	const [cloudImageURL, setCloudImageURL] = useState(image);
+
 	return (
 		<div
 			className="user-profile-card-container"
 			style={{ paddingTop: '12vh' }}
 		>
-			<img src={!image ? profile : image} alt="user" />
+			<img src={!cloudImageURL ? profile : image} alt="user" />
 
 			<div
 				onClick={async () => {
@@ -40,7 +47,6 @@ const Profile = () => {
 								imageAlt: 'The uploaded picture',
 							});
 						};
-
 						const formData = new FormData();
 						formData.append('image', file);
 
@@ -52,11 +58,6 @@ const Profile = () => {
 								formData,
 							)
 							.then((response) => {
-								Cookies.set(
-									'userImage',
-									response.data.data.url,
-								);
-
 								response.status === 200 &&
 									axios
 										.put(
@@ -64,15 +65,16 @@ const Profile = () => {
 												import.meta.env.VITE_APP_URL
 											}/api/user/update/${_id}`,
 											{
-												image: cloudImageURL,
+												image: response.data.data.url,
 											},
 											{ new: true },
 										)
-										.then((response) => {
+										.then((res) => {
+											console.log(res);
 											setCloudImageURL(
-												Cookies.get('userImage'),
+												res.data.user.image,
 											);
-											console.log(response);
+											console.log(res);
 										});
 							})
 

@@ -1,24 +1,39 @@
 import React, { useEffect, useState } from 'react';
 import { getAllPending, getTripsByUserID } from '../App.jsx';
-import Cookies from 'js-cookie';
-import Sidebar from './Sidebar.jsx';
 import Passengers from './Passengers.jsx';
 import RecentActivity from './RecentActivity.jsx';
 import { useAuthUser } from 'react-auth-kit';
 import { NavLink } from 'react-router-dom';
+import axios from 'axios';
 
 const HostedTrips = () => {
 	// const user_id = JSON.parse(Cookies.get('user'))._id;
 	const userData = useAuthUser();
 	const user_id = userData()._id;
 	const [userTrips, setUserTrips] = useState([]);
+	const getUserById = () => {
+		axios
+			.get(
+				`${
+					import.meta.env.VITE_APP_URL
+				}/api/trips?host_name=${user_id}`,
+			)
+			.then((res) => {
+				console.log(res.data.trips);
+				setUserTrips(res.data.trips);
+			})
+			.catch((err) => console.log(err));
+	};
 	useEffect(() => {
-		getTripsByUserID(user_id, setUserTrips);
+		getUserById();
 	}, []);
 
 	return (
 		<div>
-			<div className="hosted-trips-container" style={{paddingTop : '10vh'}}>
+			<div
+				className="hosted-trips-container"
+				style={{ paddingTop: '10vh' }}
+			>
 				<h2
 					style={{
 						textAlign: 'center',
@@ -52,6 +67,7 @@ const HostedTrips = () => {
 							start_time,
 							vehicle_type,
 							seats,
+							approvedPassengers,
 						}) => {
 							return (
 								<article key={_id}>
@@ -100,7 +116,11 @@ const HostedTrips = () => {
 												marginTop: '10px',
 											}}
 										>
-											<Passengers />
+											<Passengers
+												arrayOfUsers={
+													approvedPassengers
+												}
+											/>
 										</span>
 									</div>
 								</article>

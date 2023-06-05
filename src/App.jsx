@@ -60,16 +60,7 @@ export const joinTrip = ({ trip_id, user_id }) => {
 			console.log(err);
 		});
 };
-export const getAllTrips = (handler) => {
-	axios
-		.get(`${import.meta.env.VITE_APP_URL}/api/trips/`)
-		.then((res) => {
-			console.log(res.data.trips);
 
-			handler(res.data.trips);
-		})
-		.catch((err) => console.log(err));
-};
 export const getTripByID = ({ trip_id, stateHandler }) => {
 	axios
 		.get(`${import.meta.env.VITE_APP_URL}/api/trips/${trip_id}`)
@@ -99,14 +90,13 @@ const createTrip = (e, trip_data, form) => {
 			console.log(err);
 		});
 };
-const approvePassenger = (trip_id, user_id) => {
+export const approvePassenger = (trip_id, user_id) => {
 	axios
 		.post(`${import.meta.env.VITE_APP_URL}/api/trips/${trip_id}/approve`, {
 			passengerId: user_id,
 		})
 		.then((res) => {
 			console.log(res);
-			getAllTrips();
 		})
 		.catch((err) => console.log(err));
 };
@@ -158,6 +148,18 @@ export const getTripsByUserID = (id, handler) => {
 };
 function App() {
 	const [sidebarExpanded, setSidebarExpanded] = useState(false);
+	const [trips, setTrips] = useState(null);
+
+	const getAllTrips = (handler) => {
+		axios
+			.get(`${import.meta.env.VITE_APP_URL}/api/trips/`)
+			.then((res) => {
+				console.log(res.data.trips);
+				handler(res.data.trips);
+			})
+			.catch((err) => console.log(err));
+	};
+
 	return (
 		<div className="homepage-container">
 			<sidebarStatus.Provider
@@ -184,10 +186,15 @@ function App() {
 							>
 								<Route
 									path="/"
-									element={<Home getAllTrips={getAllTrips} />}
+									element={
+										<Home
+											trips={trips}
+											getAllTrips={getAllTrips}
+										/>
+									}
 								/>
 								<Route
-									path="*"
+									path="/*"
 									element={<Home getAllTrips={getAllTrips} />}
 								/>
 								<Route

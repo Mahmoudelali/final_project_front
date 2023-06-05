@@ -7,7 +7,6 @@ import { sidebarStatus } from '../App.jsx';
 import Sidebar from '../Components/Sidebar';
 import Loader from '../Components/Loader';
 import PreviewTrip from '../Components/PreviewTrip.jsx';
-import TripDetails from '../Components/Trip_Details';
 
 const Home = ({ getAllTrips }) => {
 	const [sidebarExpanded, setSidebarExpanded] = useContext(sidebarStatus);
@@ -26,7 +25,7 @@ const Home = ({ getAllTrips }) => {
 			>
 				{!sidebarExpanded ? <MenuIcon /> : <CloseIcon />}
 			</button>
-			<Sidebar />
+
 			<main>
 				<div className="home-hero-section">
 					<div>

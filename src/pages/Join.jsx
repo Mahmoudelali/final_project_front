@@ -30,7 +30,6 @@ const Join = ({ getAllTrips, joinTrip }) => {
 			style={{ padding: '10vh 0 3rem 0  ' }}
 		>
 			<Outlet />
-
 			<form
 				style={{
 					background: '#fff3cf',
@@ -122,7 +121,9 @@ const Join = ({ getAllTrips, joinTrip }) => {
 			</form>
 
 			{trips.length === 0 ? (
-				<Loader />
+				<div className="center" style={{ marginTop: '10px' }}>
+					Sorry,No Trips found!
+				</div>
 			) : (
 				trips.length > 0 &&
 				trips

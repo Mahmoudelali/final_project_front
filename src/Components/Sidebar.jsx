@@ -55,13 +55,13 @@ const sideLinks = [
 		),
 		path: '/trips/hosted',
 	},
-	{
-		name: 'joined Trips',
-		icon: (
-			<GroupsIcon sx={{ verticalAlign: 'middle', marginBottom: '5px' }} />
-		),
-		path: '/trips/joined',
-	},
+	// {
+	// 	name: 'joined Trips',
+	// 	icon: (
+	// 		<GroupsIcon sx={{ verticalAlign: 'middle', marginBottom: '5px' }} />
+	// 	),
+	// 	path: '/trips/joined',
+	// },
 	{
 		name: 'Pending Requests',
 		icon: <MoreHorizIcon className="middle" />,
@@ -73,7 +73,8 @@ const Sidebar = ({ rate }) => {
 	const userData = useAuthUser();
 	const navigate = useNavigate();
 	const signOut = useSignOut();
-	const image = Cookies.get('userImage');
+
+	const image = userData().image;
 	return (
 		<div
 			className={
