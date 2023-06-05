@@ -4,14 +4,20 @@ import Loader from './Loader';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import CloseIcon from '@mui/icons-material/Close';
 import noImage from '../assets/PROFILE.jpg';
-import { Grid } from '@mui/material';
+import { useAuthUser } from 'react-auth-kit';
 import { approvePassenger } from '../App.jsx';
 
 const Pending = ({ getAllTrips }) => {
 	const [pendingReq, setPendingReq] = useState(null);
-
-	const user_id = JSON.parse(localStorage.getItem('_auth_state'))._id;
-
+	const userData = useAuthUser();
+	const user_id = userData()._id;
+	console.log(user_id);
+	console.log(
+		pendingReq &&
+			pendingReq.filter((trip) => {
+				return trip.host_name._id === user_id;
+			}),
+	);
 	const getUserById = () => {
 		axios
 			.get(
@@ -21,16 +27,23 @@ const Pending = ({ getAllTrips }) => {
 			)
 			.then((res) => {
 				console.log(res.data.trips);
-				setPendingReq(res.data.trips);
+				setPendingReq(
+					res.data.trips.filter((trips) => {
+						return trips.host_name._id === user_id;
+					}),
+				);
 			})
 			.catch((err) => console.log(err));
 	};
 
 	useEffect(getUserById, []);
 	return !pendingReq ? (
-		<Loader isComponent={true} />
+		<Loader component_loading={true} />
 	) : pendingReq.length === 0 ? (
-		<span>No Placed Requests </span>
+		<div style={{ marginTop: '10vh'  }} className="pending-container center">
+			{' '}
+			<span>No Placed Requests </span>
+		</div>
 	) : (
 		<div
 			className="pending-container"
@@ -53,12 +66,15 @@ const Pending = ({ getAllTrips }) => {
 							<td>image</td>
 							<td>start - end</td>
 							<td>approve</td>
-							<td>decline</td>
+
 							<td>#user_id</td>
 						</tr>
 					</thead>
 					<tbody>
-						{pendingReq &&
+						{!pendingReq ? (
+							<Loader />
+						) : (
+							pendingReq &&
 							pendingReq.map((trip, index) => {
 								return trip.passengers.map((nested) => {
 									return (
@@ -111,7 +127,7 @@ const Pending = ({ getAllTrips }) => {
 													/>
 												</button>
 											</td>
-											<td>
+											{/* <td>
 												<Grid
 													style={{
 														backgroundColor:
@@ -128,12 +144,13 @@ const Pending = ({ getAllTrips }) => {
 														}}
 													/>
 												</Grid>
-											</td>
+											</td> */}
 											<td>{nested._id}</td>
 										</tr>
 									);
 								});
-							})}
+							})
+						)}
 					</tbody>
 				</table>
 			</div>

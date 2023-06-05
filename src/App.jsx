@@ -96,9 +96,19 @@ export const approvePassenger = (trip_id, user_id) => {
 			passengerId: user_id,
 		})
 		.then((res) => {
+			res.status === 200 &&
+				Toast.fire({
+					icon: 'success',
+					title: 'Passenger Approved!',
+				});
 			console.log(res);
 		})
-		.catch((err) => console.log(err));
+		.catch((err) => {
+			Toast.fire({
+				icon: 'error',
+				title: 'My Fault, cannot approve This passenger!',
+			});
+		});
 };
 export const getAllPending = (trip_id, handler) => {
 	axios

@@ -31,13 +31,21 @@
 }
 
 .home-hero-section {
+	position: relative;
+	
 	height: 100vh;
 	background-image: url('./assets/Traffic.jpg');
 
 	background-repeat: no-repeat;
 	background-position: left;
 	background-size: cover;
-	position: relative;
+}
+@media screen and (min-width: 768px) {
+	.home-hero-section {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
 }
 .home-hero-section::before {
 	content: '';

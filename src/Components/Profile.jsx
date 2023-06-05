@@ -74,7 +74,6 @@ const Profile = () => {
 											setCloudImageURL(
 												res.data.user.image,
 											);
-											console.log(res);
 										});
 							})
 

@@ -31,33 +31,7 @@ const Login = () => {
 			toast.addEventListener('mouseleave', Swal.resumeTimer);
 		},
 	});
-	const addNewUser = () => {
-		axios
-			.post(`${nodeEnv}/api/user/create`, {
-				phone: userData.phone,
-				password: userData.password,
-				first_name: userData.first_name,
-				last_name: userData.last_name,
-			})
-			.then((res) => {
-				console.log(res);
-				if (res.data.error) {
-					Toast.fire({
-						icon: 'error',
-						title: 'already exists',
-					});
-				}
-				Toast.fire({
-					icon: 'success',
-					title: 'Welcome to PickmeuP',
-				});
 
-				res.status == 200 && navigate('/');
-			})
-			.catch((err) => {
-				console.log(err.message);
-			});
-	};
 	const loginUSer = () => {
 		axios
 			.post(`${nodeEnv}/api/user/login`, userData)
