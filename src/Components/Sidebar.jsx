@@ -9,12 +9,12 @@ import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import CommuteIcon from '@mui/icons-material/Commute';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-
-import { useAuthUser, useSignOut } from 'react-auth-kit';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import HandshakeIcon from '@mui/icons-material/Handshake';
 import GroupsIcon from '@mui/icons-material/Groups';
-4;
-import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+
+import { useAuthUser, useSignOut } from 'react-auth-kit';
+
 import Cookies from 'js-cookie';
 
 const sideLinks = [
@@ -78,7 +78,11 @@ const Sidebar = ({ rate }) => {
 	return (
 		<div
 			className={
-				sidebarExpanded ? 'side-bar' : 'side-bar side-bar-collapsed'
+				screen.width > 768
+					? 'side-bar'
+					: sidebarExpanded
+					? 'side-bar'
+					: 'side-bar side-bar-collapsed'
 			}
 			id="sidebar"
 		>
@@ -132,7 +136,7 @@ const Sidebar = ({ rate }) => {
 						return (
 							<li
 								key={index}
-								style={{ marginTop: ' 10px' }}
+								
 								onClick={() => {
 									setSidebarExpanded(!setSidebarExpanded);
 								}}

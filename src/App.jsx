@@ -80,7 +80,7 @@ const createTrip = (e, trip_data, form) => {
 					title: 'Trip Added Successfully',
 				});
 			form.reset();
-			getAllTrips();
+
 		})
 		.catch((err) => {
 			Toast.fire({

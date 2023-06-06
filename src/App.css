@@ -32,7 +32,7 @@
 
 .home-hero-section {
 	position: relative;
-	
+
 	height: 100vh;
 	background-image: url('./assets/Traffic.jpg');
 
@@ -40,13 +40,7 @@
 	background-position: left;
 	background-size: cover;
 }
-@media screen and (min-width: 768px) {
-	.home-hero-section {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
-}
+
 .home-hero-section::before {
 	content: '';
 	position: absolute;
@@ -112,7 +106,9 @@
 	max-height: 8vh;
 	overflow: hidden;
 }
-
+.nav-links {
+	display: none;
+}
 .brand-container {
 	height: 8vh;
 	width: 50%;
@@ -357,4 +353,48 @@
 	color: inherit;
 	letter-spacing: 1px;
 	font-weight: 500;
+}
+
+@media screen and (min-width: 768px) {
+	.home-hero-section {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding: 0 !important;
+	}
+	.home-hero-section > div {
+		max-width: 50%;
+		align-items: center;
+	}
+	.home-hero-section h1 {
+		font-size: 4rem !important;
+		text-align: center;
+	}
+
+	.brand-container {
+		width: 18%;
+	}
+	.side-bar,
+	.toggle-icons {
+		display: none;
+	}
+	.homepage-container header {
+		justify-content: space-between !important;
+		align-items: center;
+		padding-inline: 2rem;
+	}
+	.nav-links {
+		display: flex;
+		color: #fff !important;
+		background-color: #eee;
+		color: #eee;
+		position: relative;
+		all: unset;
+	}
+	.nav-links a {
+		color: inherit;
+		margin: 0 10px;
+		letter-spacing: 1px;
+		transition: 0.2s;
+	}
 }
