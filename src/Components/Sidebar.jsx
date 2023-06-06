@@ -136,10 +136,10 @@ const Sidebar = ({ rate }) => {
 						return (
 							<li
 								key={index}
-								
 								onClick={() => {
 									setSidebarExpanded(!setSidebarExpanded);
 								}}
+								style={{ margin: '.7rem 0 ' }}
 							>
 								<NavLink
 									to={path}

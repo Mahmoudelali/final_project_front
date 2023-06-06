@@ -40,49 +40,53 @@ const Home = ({ getAllTrips }) => {
 						</div>
 					</div>
 				</div>
-				{!trips ? (
-					<Loader component_loading={true} />
-				) : trips && trips.length === 0 ? (
-					<p style={{ textAlign: 'center' }}>Sorry, No Trips found</p>
-				) : (
-					trips
-						.slice(0, 5)
-						.map(
-							({
-								_id,
-								host_name,
-								profile,
-								approved_passengers,
-								vehicle_type,
-								cost,
-								start_location,
-								end_location,
-								start_date,
-								seats,
-								description,
-								start_time,
-							}) => {
-								return (
-									<PreviewTrip
-										setTrips={setTrips}
-										tripID={_id}
-										key={_id}
-										start_time={start_time}
-										vehicle_type={vehicle_type}
-										price={cost}
-										start_date={start_date}
-										start_spot={start_location}
-										end_spot={end_location}
-										available_seats={seats}
-										description={description}
-										passengers={approved_passengers}
-										host_name={host_name.first_name}
-										profile={profile}
-									/>
-								);
-							},
-						)
-				)}
+				<div style={{ padding: '2rem 0 ' }}>
+					{!trips ? (
+						<Loader component_loading={true} />
+					) : trips && trips.length === 0 ? (
+						<p style={{ textAlign: 'center' }}>
+							Sorry, No Trips found
+						</p>
+					) : (
+						trips
+							.slice(0, 5)
+							.map(
+								({
+									_id,
+									host_name,
+									profile,
+									approved_passengers,
+									vehicle_type,
+									cost,
+									start_location,
+									end_location,
+									start_date,
+									seats,
+									description,
+									start_time,
+								}) => {
+									return (
+										<PreviewTrip
+											setTrips={setTrips}
+											tripID={_id}
+											key={_id}
+											start_time={start_time}
+											vehicle_type={vehicle_type}
+											price={cost}
+											start_date={start_date}
+											start_spot={start_location}
+											end_spot={end_location}
+											available_seats={seats}
+											description={description}
+											passengers={approved_passengers}
+											host_name={host_name.first_name}
+											profile={profile}
+										/>
+									);
+								},
+							)
+					)}
+				</div>
 			</main>
 		</div>
 	);

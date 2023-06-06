@@ -80,7 +80,6 @@ const createTrip = (e, trip_data, form) => {
 					title: 'Trip Added Successfully',
 				});
 			form.reset();
-
 		})
 		.catch((err) => {
 			Toast.fire({
@@ -204,10 +203,6 @@ function App() {
 									}
 								/>
 								<Route
-									path="/*"
-									element={<Home getAllTrips={getAllTrips} />}
-								/>
-								<Route
 									path="/new"
 									element={
 										<NewTrip createTrip={createTrip} />
@@ -230,6 +225,7 @@ function App() {
 									path="/trips/requests"
 									element={<Pending />}
 								/>
+								<Route element={<div>Not Found!</div>} />
 							</Route>
 						</Routes>
 					</BrowserRouter>

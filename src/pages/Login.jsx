@@ -53,6 +53,10 @@ const Login = () => {
 			})
 			.catch((err) => {
 				console.log(err);
+				Toast.fire({
+					icon: 'error',
+					title: err.response.data.err,
+				});
 			});
 	};
 	const rediretUser = () => {
@@ -83,6 +87,10 @@ const Login = () => {
 			})
 			.catch((err) => {
 				console.log(err.message);
+				Toast.fire({
+					icon: 'error',
+					title: 'Welcome to PickmeuP',
+				});
 			});
 	};
 	const checkPasswordMatch = (e) => {
