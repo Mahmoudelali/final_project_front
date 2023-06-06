@@ -79,7 +79,7 @@ const Home = ({ getAllTrips }) => {
 											available_seats={seats}
 											description={description}
 											passengers={approved_passengers}
-											host_name={host_name.first_name}
+											// host_name={host_name.first_name}
 											profile={profile}
 										/>
 									);
